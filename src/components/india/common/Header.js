@@ -10,7 +10,6 @@ const Header = ({ bgcolor }) => {
 
   const handleClick = () => {
     setClick(!click);
-    // Prevent body scroll when menu is open
     if (!click) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -18,7 +17,6 @@ const Header = ({ bgcolor }) => {
     }
   };
 
-  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = event => {
       if (
@@ -52,7 +50,6 @@ const Header = ({ bgcolor }) => {
     };
   }, []);
 
-  // Clean up body overflow on unmount
   useEffect(() => {
     return () => {
       document.body.style.overflow = 'unset';
@@ -63,14 +60,19 @@ const Header = ({ bgcolor }) => {
     <div
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-white/80 backdrop-blur-lg shadow-lg'
-          : 'bg-gradient-to-b from-black/50 to-transparent'
+          ? 'bg-white/90 backdrop-blur-lg shadow-lg shadow-black/[0.03]'
+          : 'bg-gradient-to-b from-black/30 to-transparent'
       }`}
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-orange/5 to-primary/5"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/[0.02] to-accent/[0.02]"></div>
+
       <nav className="container relative mx-auto">
         <div className="flex items-center justify-between h-20 px-4 md:px-0">
-          <Link href="/" className="relative z-10">
+          {/* Logo */}
+          <Link
+            href="/"
+            className="relative z-10 transition-transform duration-300 hover:scale-105"
+          >
             <Image
               src={
                 scrolled
@@ -88,7 +90,7 @@ const Header = ({ bgcolor }) => {
           <div className="hidden md:flex items-center space-x-8">
             <Link href="/">
               <span
-                className={`text-sm font-medium transition-all duration-200 hover:text-primary ${
+                className={`text-sm font-medium transition-all duration-200 hover:text-primary relative after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-primary after:transition-all after:duration-300 ${
                   scrolled ? 'text-gray-700' : 'text-white'
                 }`}
               >
@@ -97,7 +99,7 @@ const Header = ({ bgcolor }) => {
             </Link>
             <Link href="#">
               <span
-                className={`text-sm font-medium transition-all duration-200 hover:text-primary ${
+                className={`text-sm font-medium transition-all duration-200 hover:text-primary relative after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-primary after:transition-all after:duration-300 ${
                   scrolled ? 'text-gray-700' : 'text-white'
                 }`}
               >
@@ -105,8 +107,10 @@ const Header = ({ bgcolor }) => {
               </span>
             </Link>
             <Link href="/visa/step-one">
-              <span className="px-6 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-primary via-primary to-orange rounded-full hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 transform hover:-translate-y-0.5">
-                Apply E-VISA
+              <span className="relative px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 transform hover:-translate-y-0.5 inline-block">
+                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary via-primary to-accent rounded-full animate-gradient"></span>
+                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary via-accent to-primary rounded-full opacity-0 hover:opacity-100 transition-opacity duration-500"></span>
+                <span className="relative">Apply E-VISA</span>
               </span>
             </Link>
           </div>
@@ -146,21 +150,21 @@ const Header = ({ bgcolor }) => {
           >
             <div className="flex flex-col h-full pt-24">
               <Link href="/" onClick={handleClick}>
-                <div className="px-8 py-4 transition-all duration-200 border-b border-gray-100 hover:bg-gradient-to-r hover:from-orange/5 hover:to-primary/5">
+                <div className="px-8 py-4 transition-all duration-200 border-b border-gray-100 hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5">
                   <span className="text-base font-medium text-gray-800">
                     Home
                   </span>
                 </div>
               </Link>
               <Link href="#" onClick={handleClick}>
-                <div className="px-8 py-4 transition-all duration-200 border-b border-gray-100 hover:bg-gradient-to-r hover:from-orange/5 hover:to-primary/5">
+                <div className="px-8 py-4 transition-all duration-200 border-b border-gray-100 hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5">
                   <span className="text-base font-medium text-gray-800">
                     Contact Us
                   </span>
                 </div>
               </Link>
               <Link href="/visa/step-one" onClick={handleClick}>
-                <div className="px-8 py-4 transition-all duration-200 border-b border-gray-100 bg-gradient-to-r from-primary/5 to-orange/5 hover:from-primary/10 hover:to-orange/10">
+                <div className="px-8 py-4 transition-all duration-200 border-b border-gray-100 bg-gradient-to-r from-primary/5 to-accent/5 hover:from-primary/10 hover:to-accent/10">
                   <span className="text-base font-semibold text-primary">
                     Apply E-VISA
                   </span>
@@ -170,8 +174,10 @@ const Header = ({ bgcolor }) => {
           </div>
         </div>
       </nav>
+
+      {/* Bottom Border */}
       {bgcolor && scrolled && (
-        <div className="h-px bg-gradient-to-r from-orange/20 via-primary/20 to-orange/20" />
+        <div className="h-px bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20" />
       )}
     </div>
   );

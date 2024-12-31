@@ -32,14 +32,31 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${plusJakartaSans.className} flex flex-col min-h-screen antialiased`}
+        className={`${plusJakartaSans.className} flex flex-col min-h-screen antialiased bg-background`}
       >
         <FormProvider>
           <ReactQueryProvider>
+            <div className="h-1 bg-gradient-to-r from-primary via-accent to-primary"></div>
+            <div className="fixed inset-0 bg-[url('/assets/images/india/common/pattern.png')] bg-repeat opacity-[0.02] pointer-events-none"></div>
+            <div className="fixed inset-0 bg-gradient-to-br from-primary/[0.02] via-transparent to-accent/[0.02] pointer-events-none"></div>
             <Header />
-            <div className="flex-1">{children}</div>
+            <div className="flex-1 relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] to-transparent pointer-events-none"></div>
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.8),transparent_70%)] pointer-events-none"></div>
+              {children}
+            </div>
             <Footer />
-            <ToastContainer />
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              closeOnClick
+              pauseOnHover
+              theme="light"
+              toastClassName="bg-white shadow-lg border border-gray-100 !rounded-xl"
+              bodyClassName="text-gray-800"
+              progressClassName="bg-primary"
+            />
           </ReactQueryProvider>
         </FormProvider>
         <GoogleTagManager gtmId="G-LC9MZM89N4" />
