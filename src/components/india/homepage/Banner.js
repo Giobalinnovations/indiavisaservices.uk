@@ -4,52 +4,53 @@ import Link from 'next/link';
 
 const Banner = () => {
   return (
-    <div className="relative min-h-[600px] mt-20">
-      {/* Background Image with Overlay */}
+    <div className="relative min-h-[calc(100vh-5rem)] sm:min-h-[600px] mt-16 sm:mt-20">
+      {/* Background Image with Overlay - Enhanced gradients */}
       <div className="absolute inset-0 z-0">
         <div
-          className="relative w-full h-full bg-no-repeat bg-cover"
+          className="relative w-full h-full bg-no-repeat bg-cover bg-center"
           style={{
             backgroundImage: 'url("/assets/images/india/home/banner.png")',
-            backgroundPosition: 'center',
           }}
         >
-          {/* Multiple overlay layers for better content visibility */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/85 to-black/50"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/50"></div>
-          <div className="absolute inset-0 bg-black/20"></div>
+          {/* Optimized overlay gradients for better visibility */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 to-black/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60"></div>
+          <div className="absolute inset-0 bg-black/15"></div>
         </div>
       </div>
 
-      {/* Content */}
-      <div className="container relative z-10 h-full px-4 mx-auto md:px-6 lg:px-8">
-        <div className="flex items-center h-full py-16 md:py-20">
-          <div className="relative max-w-2xl text-white">
-            {/* Content Backdrop */}
-            <div className="absolute inset-0 bg-black/30 backdrop-blur-sm rounded-3xl"></div>
+      {/* Content - Enhanced responsive layout */}
+      <div className="container relative z-10 h-full px-4 sm:px-6 lg:px-8 mx-auto">
+        <div className="flex items-center h-full py-8 sm:py-12 md:py-16 lg:py-20">
+          <div className="relative w-full max-w-2xl text-white">
+            {/* Improved content backdrop for better visibility */}
+            <div className="absolute inset-0 bg-black/40 backdrop-blur-sm rounded-xl sm:rounded-2xl md:rounded-3xl"></div>
 
-            {/* Actual Content */}
-            <div className="relative p-8 md:p-10">
-              <h1 className="mb-6 text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
+            {/* Enhanced responsive content spacing */}
+            <div className="relative p-4 sm:p-6 md:p-8 lg:p-10">
+              {/* Responsive typography */}
+              <h1 className="mb-3 sm:mb-4 md:mb-6 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight">
                 <span className="text-primary">Indian Visa</span> Application
                 Made Simple
               </h1>
 
-              <p className="mb-8 text-base text-gray-200 md:text-lg">
+              <p className="mb-4 sm:mb-6 md:mb-8 text-xs sm:text-sm md:text-base lg:text-lg text-gray-200">
                 Fast, secure, and reliable visa services with expert guidance at
                 every step
               </p>
 
-              <div className="mb-12">
+              {/* Responsive button sizing */}
+              <div className="mb-6 sm:mb-8 md:mb-10">
                 <Link href="/visa/step-one" className="inline-block group">
-                  <span className="relative inline-flex items-center justify-center px-8 py-4 font-semibold text-white transition-all duration-300 transform hover:-translate-y-0.5">
+                  <span className="relative inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-semibold text-white transition-all duration-300 transform hover:-translate-y-0.5">
                     <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary via-primary to-accent rounded-xl animate-gradient"></span>
                     <span className="absolute inset-0 w-full h-full transition-opacity duration-500 opacity-0 bg-gradient-to-r from-primary via-accent to-primary rounded-xl group-hover:opacity-100"></span>
-                    <span className="relative flex items-center text-lg">
+                    <span className="relative flex items-center">
                       Apply Now
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="w-6 h-6 ml-2 transition-transform duration-300 group-hover:translate-x-1"
+                        className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -66,13 +67,13 @@ const Banner = () => {
                 </Link>
               </div>
 
-              {/* Trust Indicators */}
-              <div className="grid grid-cols-3 gap-6 pt-8 border-t border-white/10">
-                <div className="flex items-center space-x-3">
-                  <div className="p-2 rounded-lg bg-white/10">
+              {/* Responsive trust indicators */}
+              <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 pt-4 sm:pt-6 md:pt-8 border-t border-white/10">
+                <div className="flex items-center space-x-2 sm:space-x-3">
+                  <div className="p-1.5 sm:p-2 rounded-lg bg-white/10">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 h-5 text-primary"
+                      className="w-4 h-4 sm:w-5 sm:h-5 text-primary"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -85,13 +86,15 @@ const Banner = () => {
                       />
                     </svg>
                   </div>
-                  <span className="text-sm font-medium">Secure Process</span>
+                  <span className="text-xs sm:text-sm font-medium">
+                    Secure Process
+                  </span>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <div className="p-2 rounded-lg bg-white/10">
+                <div className="flex items-center space-x-2 sm:space-x-3">
+                  <div className="p-1.5 sm:p-2 rounded-lg bg-white/10">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 h-5 text-primary"
+                      className="w-4 h-4 sm:w-5 sm:h-5 text-primary"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -104,13 +107,15 @@ const Banner = () => {
                       />
                     </svg>
                   </div>
-                  <span className="text-sm font-medium">24/7 Support</span>
+                  <span className="text-xs sm:text-sm font-medium">
+                    24/7 Support
+                  </span>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <div className="p-2 rounded-lg bg-white/10">
+                <div className="flex items-center space-x-2 sm:space-x-3">
+                  <div className="p-1.5 sm:p-2 rounded-lg bg-white/10">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 h-5 text-primary"
+                      className="w-4 h-4 sm:w-5 sm:h-5 text-primary"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -123,7 +128,9 @@ const Banner = () => {
                       />
                     </svg>
                   </div>
-                  <span className="text-sm font-medium">Fast Processing</span>
+                  <span className="text-xs sm:text-sm font-medium">
+                    Fast Processing
+                  </span>
                 </div>
               </div>
             </div>
@@ -131,8 +138,8 @@ const Banner = () => {
         </div>
       </div>
 
-      {/* Bottom Border */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+      {/* Enhanced bottom border */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent"></div>
     </div>
   );
 };

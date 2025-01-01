@@ -1,185 +1,106 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
-const Header = ({ bgcolor }) => {
-  const [click, setClick] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  const handleClick = () => {
-    setClick(!click);
-    if (!click) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-  };
-
-  useEffect(() => {
-    const handleClickOutside = event => {
-      if (
-        click &&
-        !event.target.closest('.mobile-menu') &&
-        !event.target.closest('.menu-button')
-      ) {
-        setClick(false);
-        document.body.style.overflow = 'unset';
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [click]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, []);
+const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? 'bg-white/90 backdrop-blur-lg shadow-lg shadow-black/[0.03]'
-          : 'bg-gradient-to-b from-black/30 to-transparent'
-      }`}
+    <header
+      className="fixed top-0 left-0 right-0 bg-white shadow-md"
+      style={{ zIndex: 999 }}
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/[0.02] to-accent/[0.02]"></div>
-
       <nav className="container relative mx-auto">
-        <div className="flex items-center justify-between h-20 px-4 md:px-0">
+        <div className="flex items-center justify-between h-20 px-6">
           {/* Logo */}
-          <Link
-            href="/"
-            className="relative z-10 transition-transform duration-300 hover:scale-105"
-          >
+          <Link href="/" className="relative">
             <Image
-              src={
-                scrolled
-                  ? '/assets/images/india/common/logo.png'
-                  : '/assets/images/india/common/logo-white.png'
-              }
-              width={144}
-              height={40}
-              alt="logo"
-              className="w-36 transition-all duration-300"
+              src="/assets/images/india/common/logo.png"
+              width={150}
+              height={45}
+              alt="Indian Visa Portal"
+              className="relative"
+              priority
             />
           </Link>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Desktop Navigation */}
+          <div className="items-center hidden space-x-8 md:flex">
             <Link href="/">
-              <span
-                className={`text-sm font-medium transition-all duration-200 hover:text-primary relative after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-primary after:transition-all after:duration-300 ${
-                  scrolled ? 'text-gray-700' : 'text-white'
-                }`}
-              >
-                Home
+              <span className="text-gray-700 hover:text-primary-600">Home</span>
+            </Link>
+            <Link href="/about">
+              <span className="text-gray-700 hover:text-primary-600">
+                About
               </span>
             </Link>
-            <Link href="#">
-              <span
-                className={`text-sm font-medium transition-all duration-200 hover:text-primary relative after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-primary after:transition-all after:duration-300 ${
-                  scrolled ? 'text-gray-700' : 'text-white'
-                }`}
-              >
-                Contact Us
+            <Link href="/services">
+              <span className="text-gray-700 hover:text-primary-600">
+                Services
               </span>
             </Link>
             <Link href="/visa/step-one">
-              <span className="relative px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 transform hover:-translate-y-0.5 inline-block">
-                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary via-primary to-accent rounded-full animate-gradient"></span>
-                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary via-accent to-primary rounded-full opacity-0 hover:opacity-100 transition-opacity duration-500"></span>
-                <span className="relative">Apply E-VISA</span>
+              <span className="inline-flex items-center px-6 py-2.5 text-sm font-medium text-white bg-primary-600 rounded-full hover:bg-primary-700 transition-colors duration-300">
+                Start Application
+                <svg
+                  className="w-4 h-4 ml-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
               </span>
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="p-2 md:hidden focus:outline-none menu-button z-50"
-            onClick={handleClick}
-            aria-label="Toggle menu"
+            onClick={() => setIsOpen(!isOpen)}
+            className="p-2 md:hidden"
+            aria-label="Toggle Menu"
           >
-            {click ? (
-              <FaTimes className="w-6 h-6 text-gray-800" />
+            {isOpen ? (
+              <FaTimes className="w-6 h-6 text-gray-700" />
             ) : (
-              <FaBars
-                className={`w-6 h-6 transition-all duration-300 ${
-                  scrolled ? 'text-gray-800' : 'text-white'
-                }`}
-              />
+              <FaBars className="w-6 h-6 text-gray-700" />
             )}
           </button>
+        </div>
 
-          {/* Mobile Menu Overlay */}
-          <div
-            className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 md:hidden ${
-              click ? 'opacity-100' : 'opacity-0 pointer-events-none'
-            }`}
-            onClick={handleClick}
-          ></div>
-
-          {/* Mobile Menu */}
-          <div
-            className={`
-              fixed top-0 right-0 h-full w-[300px] bg-white shadow-2xl transform transition-transform duration-300 ease-in-out z-40
-              ${click ? 'translate-x-0' : 'translate-x-full'}
-              md:hidden mobile-menu
-            `}
-          >
-            <div className="flex flex-col h-full pt-24">
-              <Link href="/" onClick={handleClick}>
-                <div className="px-8 py-4 transition-all duration-200 border-b border-gray-100 hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5">
-                  <span className="text-base font-medium text-gray-800">
-                    Home
-                  </span>
+        {/* Mobile Menu */}
+        <div
+          className={`absolute top-full left-0 right-0 transition-all duration-300 bg-white shadow-lg md:hidden
+          ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
+        >
+          <nav className="divide-y divide-gray-100">
+            {['Home', 'About', 'Services'].map(item => (
+              <Link key={item} href="/" onClick={() => setIsOpen(false)}>
+                <div className="px-6 py-4 transition-colors duration-200 hover:bg-gray-50">
+                  <span className="text-gray-700">{item}</span>
                 </div>
               </Link>
-              <Link href="#" onClick={handleClick}>
-                <div className="px-8 py-4 transition-all duration-200 border-b border-gray-100 hover:bg-gradient-to-r hover:from-primary/5 hover:to-accent/5">
-                  <span className="text-base font-medium text-gray-800">
-                    Contact Us
-                  </span>
-                </div>
-              </Link>
-              <Link href="/visa/step-one" onClick={handleClick}>
-                <div className="px-8 py-4 transition-all duration-200 border-b border-gray-100 bg-gradient-to-r from-primary/5 to-accent/5 hover:from-primary/10 hover:to-accent/10">
-                  <span className="text-base font-semibold text-primary">
-                    Apply E-VISA
-                  </span>
-                </div>
+            ))}
+            <div className="p-4">
+              <Link
+                href="/visa/step-one"
+                onClick={() => setIsOpen(false)}
+                className="block w-full py-3 text-center text-white transition-colors duration-200 rounded-lg bg-primary-600 hover:bg-primary-700"
+              >
+                Start Application
               </Link>
             </div>
-          </div>
+          </nav>
         </div>
       </nav>
-
-      {/* Bottom Border */}
-      {bgcolor && scrolled && (
-        <div className="h-px bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20" />
-      )}
-    </div>
+    </header>
   );
 };
 
